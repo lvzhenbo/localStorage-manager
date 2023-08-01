@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "CRXJS Vue Vite Example",
+  "version": "1.0.0",
+  "action": { "default_popup": "index.html" },
+  "permissions": ["activeTab"],
+  "content_scripts": [
+    {
+      "js": ["src/scripts/content.ts"],
+      "matches": [
+        "https://developer.chrome.com/docs/extensions/*",
+        "https://developer.chrome.com/docs/webstore/*"
+      ]
+    }
+  ]
+}
