@@ -3,14 +3,15 @@
   "name": "CRXJS Vue Vite Example",
   "version": "1.0.0",
   "action": { "default_popup": "index.html" },
-  "permissions": ["activeTab"],
+  "permissions": ["activeTab", "scripting"],
   "content_scripts": [
     {
       "js": ["src/scripts/content.ts"],
-      "matches": [
-        "https://developer.chrome.com/docs/extensions/*",
-        "https://developer.chrome.com/docs/webstore/*"
-      ]
+      "matches": ["<all_urls>"]
     }
-  ]
+  ],
+  "background": {
+    "service_worker": "src/scripts/background.ts",
+    "type": "module"
+  }
 }

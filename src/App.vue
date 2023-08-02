@@ -58,13 +58,15 @@
       },
     },
   ];
-  const data = ref<RowData[]>([
-    {
-      key: 0,
-      Key: 'Key',
-      value: 'Value',
-    },
-  ]);
+  const data = ref<RowData[]>([]);
+
+  onMounted(async () => {
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    if (tab.id) {
+      const response = await chrome.tabs.sendMessage(tab.id, { method: 'get', type: type.value });
+      data.value = response;
+    }
+  });
 </script>
 
 <template>
@@ -84,7 +86,7 @@
           </NSpace>
         </div>
       </NLayoutHeader>
-      <NLayout position="absolute" class="!top-[66px]">
+      <NLayout position="absolute" class="!top-[66px]" :native-scrollbar="false">
         <NLayoutContent>
           <div class="p-4">
             <NDataTable :columns="createColumns()" :data="data" />

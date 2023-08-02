@@ -7,12 +7,10 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    NButton: typeof import('naive-ui')['NButton']
     NConfigProvider: typeof import('naive-ui')['NConfigProvider']
     NDataTable: typeof import('naive-ui')['NDataTable']
     NLayout: typeof import('naive-ui')['NLayout']
     NLayoutContent: typeof import('naive-ui')['NLayoutContent']
     NLayoutHeader: typeof import('naive-ui')['NLayoutHeader']
-    NSpace: typeof import('naive-ui')['NSpace']
   }
 }
