@@ -1,99 +1,16 @@
 <script setup lang="tsx">
-  import { zhCN, dateZhCN, NInput, NButton, NIcon, NSpace } from 'naive-ui';
-  import type { DataTableColumns } from 'naive-ui';
-  import { DeleteOutlined, CodeOutlined } from '@vicons/antd';
+  import { zhCN, dateZhCN } from 'naive-ui';
+  import hljs from 'highlight.js/lib/core';
+  import javascript from 'highlight.js/lib/languages/javascript';
 
-  type RowData = {
-    key: number;
-    Key: string;
-    value: string;
-  };
-  console.log('This is a popup!');
-  const type = ref('local');
-  const createColumns = (): DataTableColumns<RowData> => [
-    {
-      title: 'Key',
-      key: 'Key',
-      render(row) {
-        return <NInput value={row.Key} />;
-      },
-    },
-    {
-      title: 'Value',
-      key: 'value',
-      render(row) {
-        return <NInput value={row.value} />;
-      },
-    },
-    {
-      title: '操作',
-      key: 'actions',
-      render() {
-        return (
-          <NSpace>
-            <NButton
-              text
-              type="error"
-              v-slots={{
-                icon: () => (
-                  <NIcon>
-                    <DeleteOutlined />
-                  </NIcon>
-                ),
-              }}
-            ></NButton>
-            <NButton
-              text
-              type="info"
-              v-slots={{
-                icon: () => (
-                  <NIcon>
-                    <CodeOutlined />
-                  </NIcon>
-                ),
-              }}
-            ></NButton>
-          </NSpace>
-        );
-      },
-    },
-  ];
-  const data = ref<RowData[]>([]);
-
-  onMounted(async () => {
-    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    if (tab.id) {
-      const response = await chrome.tabs.sendMessage(tab.id, { method: 'get', type: type.value });
-      data.value = response;
-    }
-  });
+  hljs.registerLanguage('javascript', javascript);
 </script>
 
 <template>
-  <NConfigProvider :locale="zhCN" :date-locale="dateZhCN">
-    <NLayout content-style="height: 20rem;min-width: 45rem;">
-      <NLayoutHeader class="z-10">
-        <div class="p-4 flex">
-          <div class="mr-10">
-            <NButton strong secondary circle type="primary">
-              {{ type === 'local' ? 'L' : 'S' }}
-            </NButton>
-          </div>
-          <NSpace>
-            <NButton type="primary"> 添加 </NButton>
-            <NButton> 刷新 </NButton>
-            <NButton> 删除全部 </NButton>
-          </NSpace>
-        </div>
-      </NLayoutHeader>
-      <NLayout position="absolute" class="!top-[66px]" :native-scrollbar="false">
-        <NLayoutContent>
-          <div class="p-4">
-            <NDataTable :columns="createColumns()" :data="data" />
-          </div>
-        </NLayoutContent>
-      </NLayout>
-    </NLayout>
+  <NConfigProvider :locale="zhCN" :date-locale="dateZhCN" :hljs="hljs">
+    <NDialogProvider>
+      <Content />
+    </NDialogProvider>
   </NConfigProvider>
 </template>
 

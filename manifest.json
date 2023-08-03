@@ -9,9 +9,5 @@
       "js": ["src/scripts/content.ts"],
       "matches": ["<all_urls>"]
     }
-  ],
-  "background": {
-    "service_worker": "src/scripts/background.ts",
-    "type": "module"
-  }
+  ]
 }
