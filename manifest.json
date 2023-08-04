@@ -1,7 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "CRXJS Vue Vite Example",
-  "version": "1.0.0",
+  "name": "localStorage 管理器",
+  "version": "0.1.0.0",
+  "description": "用于添加、删除、修改localStorage和sessionStorage的简单插件",
   "action": { "default_popup": "index.html" },
   "permissions": ["activeTab", "scripting"],
   "content_scripts": [
