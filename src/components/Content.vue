@@ -1,5 +1,5 @@
 <template>
-  <NLayout content-style="height: 20rem;min-width: 45rem;">
+  <NLayout content-style="height: 25rem;min-width: 45rem;">
     <NLayoutHeader class="z-10">
       <div class="p-4 flex">
         <div class="mr-10">
