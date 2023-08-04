@@ -1,46 +1,73 @@
-# localStorage-manager
+# localStorage管理器
 
-This template should help get you started developing with Vue 3 in Vite.
+用于添加、删除、修改localStorage和sessionStorage的简单插件。
 
-## Recommended IDE Setup
+感谢 **LocalStorage** (已被下架)，这个插件就是参照而做，只实现了基本的简单的功能，有更多需求欢迎PR。
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## 技术栈
 
-## Type Support for `.vue` Imports in TS
+[Vue](https://vuejs.org/) + [Naive UI](https://www.naiveui.com/) + [CRXJS](https://crxjs.dev/vite-plugin/)
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+## 推荐 IDE 设置
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (并且禁用 Vetur ，推荐卸载) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+额外插件：[Eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) + [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) + [EditorConfig for VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig) + [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss) + [Headwind](https://marketplace.visualstudio.com/items?itemName=heybourn.headwind)
 
-## Customize configuration
+## 项目设置
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
+> 推荐使用pnpm
 
 ```sh
 pnpm install
 ```
 
-### Compile and Hot-Reload for Development
+### 开发（编译和热重载）
 
 ```sh
 pnpm dev
 ```
 
-### Type-Check, Compile and Minify for Production
+### 预览
+
+```sh
+pnpm preview
+```
+
+### 生产（类型检查、编译和最小化）
 
 ```sh
 pnpm build
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+### 生产（只编译）
+
+```sh
+pnpm build-only
+```
+
+### 类型检查
+
+```sh
+pnpm type-check
+```
+
+### [ESLint](https://eslint.org/) 格式化
 
 ```sh
 pnpm lint
 ```
+
+### [Prettier](https://prettier.io/) 格式化
+
+```sh
+pnpm format
+```
+
+## 许可证
+
+[MIT](https://opensource.org/licenses/MIT)
+
+## 隐私权政策
+
+本项目开源免费，不收集任何隐私数据。
