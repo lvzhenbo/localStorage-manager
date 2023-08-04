@@ -10,7 +10,7 @@
     "128": "src/assets/128.png"
   },
   "action": { "default_popup": "index.html" },
-  "permissions": ["activeTab", "scripting"],
+  "permissions": ["activeTab"],
   "content_scripts": [
     {
       "js": ["src/scripts/content.ts"],
