@@ -66,7 +66,7 @@
             onBlur={async () => {
               const id = await getTabId();
               if (id) {
-                await chrome.tabs.sendMessage(id, {
+                await sendMessage(id, {
                   method: 'setKey',
                   type: type.value,
                   value: {
@@ -90,7 +90,7 @@
             onBlur={async () => {
               const id = await getTabId();
               if (id) {
-                await chrome.tabs.sendMessage(id, {
+                await sendMessage(id, {
                   method: 'setValue',
                   type: type.value,
                   value: {
@@ -114,7 +114,7 @@
               onPositiveClick={async () => {
                 const id = await getTabId();
                 if (id) {
-                  await chrome.tabs.sendMessage(id, {
+                  await sendMessage(id, {
                     method: 'remove',
                     type: type.value,
                     value: row.key,
@@ -199,12 +199,17 @@
     return null;
   }
 
+  async function sendMessage(id: number, msg: any) {
+    const response = await chrome.tabs.sendMessage(id, msg);
+    return response;
+  }
+
   async function getStorage() {
     try {
       loading.value = true;
       const id = await getTabId();
       if (id) {
-        const response = await chrome.tabs.sendMessage(id, { method: 'get', type: type.value });
+        const response = await sendMessage(id, { method: 'get', type: type.value });
         data.value = response;
       } else {
         data.value = [];
@@ -225,7 +230,7 @@
   async function handleClear() {
     const id = await getTabId();
     if (id) {
-      await chrome.tabs.sendMessage(id, { method: 'clear', type: type.value });
+      await sendMessage(id, { method: 'clear', type: type.value });
       data.value = [];
     } else {
       return;
@@ -267,7 +272,7 @@
           if (!errors) {
             const id = await getTabId();
             if (id) {
-              await chrome.tabs.sendMessage(id, {
+              await sendMessage(id, {
                 method: 'set',
                 type: type.value,
                 value: { ...addForm.value },
