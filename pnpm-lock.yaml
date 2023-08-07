@@ -83,8 +83,8 @@ devDependencies:
     specifier: ^0.16.6
     version: 0.16.6
   unplugin-compression:
-    specifier: ^0.0.4
-    version: 0.0.4
+    specifier: ^0.0.5
+    version: 0.0.5
   unplugin-vue-components:
     specifier: ^0.25.1
     version: 0.25.1(vue@3.3.4)
@@ -3929,8 +3929,8 @@ packages:
       - rollup
     dev: true
 
-  /unplugin-compression@0.0.4:
-    resolution: {integrity: sha512-JMMa2ZLVbV6TFvV3WdSpmkEEuT9TYv115YsuJ478glb5zY1vvKl3azZO9bsuvB3V0V6AkcoPfcHDSToyZvFX2w==}
+  /unplugin-compression@0.0.5:
+    resolution: {integrity: sha512-0UYn6R+Adu/GYqNsjXdz7BtKURn7xGK6skC5SzWpGCUzMixAAoqElqJaiVaL9WcNS1TcTy4rhfP1IbkcwhVR9A==}
     dependencies:
       compressing: 1.9.1
       picocolors: 1.0.0

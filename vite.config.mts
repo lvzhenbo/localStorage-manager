@@ -40,6 +40,9 @@ export default defineConfig({
       formatter() {
         return `${name}-${version}.zip`;
       },
+      compressingOptions: {
+        ignoreBase: true,
+      },
     }),
     visualizer(),
   ],
