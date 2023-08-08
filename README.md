@@ -4,6 +4,8 @@
 
 感谢 **LocalStorage** (已被下架)，这个插件就是参照而做，只实现了基本的简单的功能，有更多需求欢迎PR。
 
+<a rel="noreferrer noopener" href="https://chrome.google.com/webstore/detail/hobhhoemdpinaaadoihkjnhnjolbebai"><img alt="Chrome Web Store" src="https://img.shields.io/chrome-web-store/v/hobhhoemdpinaaadoihkjnhnjolbebai?style=for-the-badge&logo=googlechrome&logoColor=white"></a><!-- markdownlint-disable-line MD033 -->
+
 ## 技术栈
 
 [Vue](https://vuejs.org/) + [Naive UI](https://www.naiveui.com/) + [CRXJS](https://crxjs.dev/vite-plugin/)
