@@ -5,9 +5,15 @@ interface IStorage {
   value: string;
 }
 
+interface Requset {
+  method: string;
+  type: string;
+  value?: any;
+}
+
 function getStorage(type: string) {
   const list: IStorage[] = [];
-  const storage = type === 'local' ? localStorage : sessionStorage;
+  const storage = getStorageType(type);
   for (let i = 0; i < storage.length; i++) {
     list.push({
       key: storage.key(i) as string,
@@ -17,19 +23,24 @@ function getStorage(type: string) {
   return list;
 }
 
-function setStorageValue(type: string, index: number, value: string) {
+function getStorageType(type: string) {
   const storage = type === 'local' ? localStorage : sessionStorage;
+  return storage;
+}
+
+function setStorageValue(type: string, index: number, value: string) {
+  const storage = getStorageType(type);
   storage.setItem(storage.key(index) as string, value);
 }
 
 function setStorageKey(type: string, index: number, key: string) {
-  const storage = type === 'local' ? localStorage : sessionStorage;
+  const storage = getStorageType(type);
   const value = storage.getItem(storage.key(index) as string) as string;
   storage.removeItem(storage.key(index) as string);
   storage.setItem(key, value);
 }
 
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+chrome.runtime.onMessage.addListener(function (request: Requset, sender, sendResponse) {
   console.log(sender.tab ? 'from a content script:' + sender.tab.url : 'from the extension');
   if (request.method === 'get') {
     sendResponse(getStorage(request.type));
@@ -40,15 +51,15 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     setStorageKey(request.type, request.value.index, request.value.key);
     // sendResponse(getStorage(request.type));
   } else if (request.method === 'remove') {
-    const storage = request.type === 'local' ? localStorage : sessionStorage;
+    const storage = getStorageType(request.type);
     storage.removeItem(request.value);
     // sendResponse(getStorage(request.type));
   } else if (request.method === 'clear') {
-    const storage = request.type === 'local' ? localStorage : sessionStorage;
+    const storage = getStorageType(request.type);
     storage.clear();
     // sendResponse(getStorage(request.type));
   } else if (request.method === 'set') {
-    const storage = request.type === 'local' ? localStorage : sessionStorage;
+    const storage = getStorageType(request.type);
     storage.setItem(request.value.key, request.value.value);
     // sendResponse(getStorage(request.type));
   }
