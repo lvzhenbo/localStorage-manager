@@ -13,7 +13,9 @@
 <template>
   <NConfigProvider :locale="zhCN" :date-locale="dateZhCN" :hljs="hljs" :theme="theme">
     <NDialogProvider>
-      <Content />
+      <NMessageProvider>
+        <Content />
+      </NMessageProvider>
     </NDialogProvider>
   </NConfigProvider>
 </template>

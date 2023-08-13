@@ -17,12 +17,15 @@
         <NSpace>
           <NButton type="primary" :disabled="disabled" @click="handleAdd"> 添加 </NButton>
           <NButton :disabled="disabled" @click="getStorage"> 刷新 </NButton>
-          <n-popconfirm @positive-click="handleClear">
+          <NPopconfirm @positive-click="handleClear">
             <template #trigger>
-              <NButton :disabled="disabled"> 删除全部 </NButton>
+              <NButton :disabled="disabled" type="error"> 删除全部 </NButton>
             </template>
             确定删除全部？
-          </n-popconfirm>
+          </NPopconfirm>
+          <NUpload :show-file-list="false" @update:file-list="handleFinish">
+            <NButton>导入</NButton>
+          </NUpload>
         </NSpace>
       </div>
     </NLayoutHeader>
@@ -67,6 +70,7 @@
     NForm,
     NFormItem,
     type FormInst,
+    type UploadFileInfo,
   } from 'naive-ui';
   import { destr } from 'destr';
   import type { DataTableColumns } from 'naive-ui';
@@ -77,7 +81,14 @@
     value: string;
   };
 
+  type OutputFile = {
+    fileId: string;
+    local: RowData[];
+    session: RowData[];
+  };
+
   const dialog = useDialog();
+  const message = useMessage();
   const createColumns = (): DataTableColumns<RowData> => [
     {
       title: 'Key',
@@ -311,6 +322,44 @@
         return result;
       },
     });
+  }
+
+  function handleFinish(fileList: UploadFileInfo[]) {
+    const reader = new FileReader();
+    reader.onload = async () => {
+      if (typeof reader.result !== 'string') {
+        return;
+      }
+      const data: OutputFile = JSON.parse(reader.result);
+      if (data.fileId) {
+        if (data.fileId === 'localStorageManager') {
+          const id = await getTabId();
+          if (id) {
+            if (data.local && data.session) {
+              await sendMessage(id, {
+                method: 'import',
+                type: 'import',
+                value: data,
+              });
+              getStorage();
+            } else {
+              importError();
+            }
+          }
+        } else {
+          importError();
+        }
+      } else {
+        importError();
+      }
+    };
+    if (fileList[0].file) {
+      reader.readAsText(fileList[0].file);
+    }
+  }
+
+  function importError() {
+    message.error('文件格式错误，请检查文件是否为本插件导出的文件');
   }
 </script>
 

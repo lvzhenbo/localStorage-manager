@@ -40,6 +40,11 @@ function setStorageKey(type: string, index: number, key: string) {
   storage.setItem(key, value);
 }
 
+function setStorage(type: string, key: string, value: string) {
+  const storage = getStorageType(type);
+  storage.setItem(key, value);
+}
+
 chrome.runtime.onMessage.addListener(function (request: Requset, sender, sendResponse) {
   console.log(sender.tab ? 'from a content script:' + sender.tab.url : 'from the extension');
   if (request.method === 'get') {
@@ -59,8 +64,16 @@ chrome.runtime.onMessage.addListener(function (request: Requset, sender, sendRes
     storage.clear();
     // sendResponse(getStorage(request.type));
   } else if (request.method === 'set') {
-    const storage = getStorageType(request.type);
-    storage.setItem(request.value.key, request.value.value);
+    setStorage(request.type, request.value.key, request.value.value);
+    // sendResponse(getStorage(request.type));
+  } else if (request.method === 'import') {
+    const data = request.value;
+    data.local.forEach((item: IStorage) => {
+      setStorage('local', item.key, item.value);
+    });
+    data.session.forEach((item: IStorage) => {
+      setStorage('session', item.key, item.value);
+    });
     // sendResponse(getStorage(request.type));
   }
 });
