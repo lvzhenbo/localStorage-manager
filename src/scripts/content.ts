@@ -1,18 +1,8 @@
 /// <reference types="@types/chrome" />
-
-interface IStorage {
-  key: string;
-  value: string;
-}
-
-interface Requset {
-  method: string;
-  type: string;
-  value?: any;
-}
+import type { RowData, OutputFile, Requset } from 'types';
 
 function getStorage(type: string) {
-  const list: IStorage[] = [];
+  const list: RowData[] = [];
   const storage = getStorageType(type);
   for (let i = 0; i < storage.length; i++) {
     list.push({
@@ -45,6 +35,15 @@ function setStorage(type: string, key: string, value: string) {
   storage.setItem(key, value);
 }
 
+function importStorage(data: OutputFile) {
+  data.local.forEach((item: RowData) => {
+    setStorage('local', item.key, item.value);
+  });
+  data.session.forEach((item: RowData) => {
+    setStorage('session', item.key, item.value);
+  });
+}
+
 chrome.runtime.onMessage.addListener(function (request: Requset, sender, sendResponse) {
   console.log(sender.tab ? 'from a content script:' + sender.tab.url : 'from the extension');
   if (request.method === 'get') {
@@ -68,12 +67,14 @@ chrome.runtime.onMessage.addListener(function (request: Requset, sender, sendRes
     // sendResponse(getStorage(request.type));
   } else if (request.method === 'import') {
     const data = request.value;
-    data.local.forEach((item: IStorage) => {
-      setStorage('local', item.key, item.value);
-    });
-    data.session.forEach((item: IStorage) => {
-      setStorage('session', item.key, item.value);
-    });
+    importStorage(data);
     // sendResponse(getStorage(request.type));
+  } else if (request.method === 'export') {
+    const data: OutputFile = {
+      fileId: 'localStorageManager',
+      local: getStorage('local'),
+      session: getStorage('session'),
+    };
+    sendResponse(data);
   }
 });

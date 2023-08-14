@@ -23,9 +23,17 @@
             </template>
             确定删除全部？
           </NPopconfirm>
-          <NUpload :show-file-list="false" @update:file-list="handleFinish">
-            <NButton>导入</NButton>
+          <NUpload
+            ref="uploadRef"
+            :show-file-list="false"
+            accept="application/json"
+            :max="1"
+            :disabled="disabled"
+            @update:file-list="handleImport"
+          >
+            <NButton> 导入 </NButton>
           </NUpload>
+          <NButton :disabled="disabled" @click="handleExport"> 导出 </NButton>
         </NSpace>
       </div>
     </NLayoutHeader>
@@ -71,21 +79,12 @@
     NFormItem,
     type FormInst,
     type UploadFileInfo,
+    type UploadInst,
   } from 'naive-ui';
   import { destr } from 'destr';
   import type { DataTableColumns } from 'naive-ui';
   import { DeleteOutlined, CodeOutlined } from '@vicons/antd';
-
-  type RowData = {
-    key: string;
-    value: string;
-  };
-
-  type OutputFile = {
-    fileId: string;
-    local: RowData[];
-    session: RowData[];
-  };
+  import type { RowData, OutputFile } from 'types';
 
   const dialog = useDialog();
   const message = useMessage();
@@ -221,6 +220,7 @@
     ],
   };
   const disabled = ref(false);
+  const uploadRef = ref<UploadInst>();
 
   onMounted(() => {
     getStorage();
@@ -324,7 +324,7 @@
     });
   }
 
-  function handleFinish(fileList: UploadFileInfo[]) {
+  function handleImport(fileList: UploadFileInfo[]) {
     const reader = new FileReader();
     reader.onload = async () => {
       if (typeof reader.result !== 'string') {
@@ -342,6 +342,7 @@
                 value: data,
               });
               getStorage();
+              message.success('导入成功');
             } else {
               importError();
             }
@@ -352,6 +353,7 @@
       } else {
         importError();
       }
+      uploadRef.value?.clear();
     };
     if (fileList[0].file) {
       reader.readAsText(fileList[0].file);
@@ -360,6 +362,23 @@
 
   function importError() {
     message.error('文件格式错误，请检查文件是否为本插件导出的文件');
+  }
+
+  async function handleExport() {
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+
+    if (tab.id) {
+      const url = new URL(tab.url as string);
+      const response = await sendMessage(tab.id, { method: 'export', type: 'export' });
+      const blob = new Blob([JSON.stringify(response)], { type: 'application/json' });
+      const blobUrl = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = blobUrl;
+      a.download = `${url.hostname}-${new Date().getTime()}.json`;
+      a.click();
+      URL.revokeObjectURL(blobUrl);
+      message.success('导出成功');
+    }
   }
 </script>
 
