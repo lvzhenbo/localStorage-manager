@@ -1,4 +1,3 @@
-/// <reference types="@types/chrome" />
 import type { RowData, OutputFile, Requset } from 'types';
 
 function getStorage(type: string) {

@@ -1,5 +1,5 @@
 <script setup lang="tsx">
-  import { zhCN, dateZhCN, useOsTheme, darkTheme, lightTheme } from 'naive-ui';
+  import { zhCN, dateZhCN, darkTheme, lightTheme } from 'naive-ui';
   import hljs from 'highlight.js/lib/core';
   import javascript from 'highlight.js/lib/languages/javascript';
 
