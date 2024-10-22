@@ -1,6 +1,6 @@
 <template>
   <NLayout content-style="height: 25rem;min-width: 45rem;">
-    <NLayoutHeader class="z-10">
+    <NLayoutHeader class="z-10" bordered position="absolute">
       <div class="p-4 flex">
         <div class="mr-10">
           <NButton
@@ -40,7 +40,14 @@
     <NLayout position="absolute" class="!top-[66px]" :native-scrollbar="false">
       <NLayoutContent>
         <div v-if="!disabled" class="p-4">
-          <NDataTable :columns="createColumns()" :data="data" :loading="loading" />
+          <NDataTable
+            :columns="createColumns()"
+            :data="data"
+            :loading="loading"
+            :max-height="253"
+            :min-height="253"
+            virtual-scroll
+          />
           <NDrawer v-model:show="active" width="100%">
             <NDrawerContent closable :native-scrollbar="false" :title="title">
               <NCode :code="code" language="javascript" word-wrap />
@@ -140,6 +147,7 @@
     {
       title: '操作',
       key: 'actions',
+      width: 80,
       render(row, index) {
         return (
           <NSpace>
