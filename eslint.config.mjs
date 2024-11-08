@@ -5,6 +5,7 @@ import vueTsEslintConfig from '@vue/eslint-config-typescript';
 import prettierConfig from '@vue/eslint-config-prettier';
 import parserVue from 'vue-eslint-parser';
 import AutoImport from './.eslintrc-auto-import.json' with { type: 'json' };
+import markdown from '@eslint/markdown';
 
 export default defineFlatConfig([
   ...pluginVue.configs['flat/recommended'],
@@ -64,4 +65,15 @@ export default defineFlatConfig([
     ignores: ['**/dist/**', '**/dist-ssr/**', '**/coverage/**'],
   },
   prettierConfig,
+  {
+    name: 'app/markdown-files',
+    files: ['**/*.md'],
+    plugins: {
+      markdown,
+    },
+    language: 'markdown/commonmark',
+    rules: {
+      'markdown/no-html': 'error',
+    },
+  },
 ]);
