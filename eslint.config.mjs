@@ -74,9 +74,13 @@ export default defineFlatConfig([
     plugins: {
       markdown,
     },
-    language: 'markdown/commonmark',
+    language: 'markdown/gfm',
     rules: {
-      // 'markdown/no-html': 'error',
+      'markdown/fenced-code-language': 'error',
+      'markdown/heading-increment': 'error',
+      'markdown/no-empty-links': 'error',
+      'markdown/no-invalid-label-refs': 'error',
+      'markdown/no-missing-label-refs': 'error',
     },
   },
   prettierConfig,
