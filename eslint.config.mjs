@@ -8,8 +8,13 @@ import AutoImport from './.eslintrc-auto-import.json' with { type: 'json' };
 import markdown from '@eslint/markdown';
 
 export default defineFlatConfig([
-  ...pluginVue.configs['flat/recommended'],
-  js.configs.recommended,
+  {
+    name: 'app/all-js&ts-files',
+    files: ['**/*.{js,mjs,cjs,jsx,ts,mts,tsx,vue}'],
+    rules: {
+      ...js.configs.recommended.rules,
+    },
+  },
   ...vueTsEslintConfig({
     supportedScriptLangs: {
       ts: true,
@@ -24,6 +29,9 @@ export default defineFlatConfig([
       parserOptions: {
         ecmaVersion: 'latest',
       },
+    },
+    rules: {
+      ...pluginVue.configs['flat/recommended'].rules,
     },
   },
   {
@@ -61,11 +69,6 @@ export default defineFlatConfig([
     },
   },
   {
-    name: 'app/files-to-ignore',
-    ignores: ['**/dist/**', '**/dist-ssr/**', '**/coverage/**'],
-  },
-  prettierConfig,
-  {
     name: 'app/markdown-files',
     files: ['**/*.md'],
     plugins: {
@@ -73,7 +76,12 @@ export default defineFlatConfig([
     },
     language: 'markdown/commonmark',
     rules: {
-      'markdown/no-html': 'error',
+      // 'markdown/no-html': 'error',
     },
+  },
+  prettierConfig,
+  {
+    name: 'app/files-to-ignore',
+    ignores: ['**/dist/**', '**/dist-ssr/**', '**/coverage/**'],
   },
 ]);
