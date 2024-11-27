@@ -1,7 +1,7 @@
 <template>
   <NLayout content-style="height: 25rem;min-width: 45rem;">
     <NLayoutHeader class="z-10" bordered position="absolute">
-      <div class="p-4 flex">
+      <div class="p-3 flex">
         <div class="mr-10">
           <NButton
             strong
@@ -40,15 +40,15 @@
         </NSpace>
       </div>
     </NLayoutHeader>
-    <NLayout position="absolute" class="!top-[61px]" :native-scrollbar="false">
+    <NLayout position="absolute" class="!top-[53px]" :native-scrollbar="false">
       <NLayoutContent>
-        <div v-if="!disabled" class="p-4">
+        <div v-if="!disabled" class="p-3">
           <NDataTable
             :columns="createColumns()"
             :data="data"
             :loading="loading"
-            :max-height="266"
-            :min-height="266"
+            :max-height="282"
+            :min-height="282"
             virtual-scroll
             size="small"
           />
