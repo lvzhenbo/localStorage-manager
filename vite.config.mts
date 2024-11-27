@@ -17,6 +17,11 @@ import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
 export default defineConfig({
   server: {
     host: true,
+    strictPort: true,
+    port: 5173,
+    hmr: {
+      clientPort: 5173,
+    },
   },
   plugins: [
     vue(),

@@ -9,17 +9,20 @@
             circle
             type="primary"
             :disabled="disabled"
+            size="small"
             @click="handleTypeChange"
           >
             {{ type === 'local' ? 'L' : 'S' }}
           </NButton>
         </div>
         <NSpace>
-          <NButton type="primary" :disabled="disabled" @click="handleAdd"> 添加 </NButton>
-          <NButton :disabled="disabled" @click="getStorage"> 刷新 </NButton>
+          <NButton type="primary" :disabled="disabled" size="small" @click="handleAdd">
+            添加
+          </NButton>
+          <NButton :disabled="disabled" size="small" @click="getStorage"> 刷新 </NButton>
           <NPopconfirm @positive-click="handleClear">
             <template #trigger>
-              <NButton :disabled="disabled" type="error"> 删除全部 </NButton>
+              <NButton :disabled="disabled" size="small" type="error"> 删除全部 </NButton>
             </template>
             确定删除全部？
           </NPopconfirm>
@@ -31,22 +34,23 @@
             :disabled="disabled"
             @update:file-list="handleImport"
           >
-            <NButton> 导入 </NButton>
+            <NButton size="small"> 导入 </NButton>
           </NUpload>
-          <NButton :disabled="disabled" @click="handleExport"> 导出 </NButton>
+          <NButton :disabled="disabled" size="small" @click="handleExport"> 导出 </NButton>
         </NSpace>
       </div>
     </NLayoutHeader>
-    <NLayout position="absolute" class="!top-[66px]" :native-scrollbar="false">
+    <NLayout position="absolute" class="!top-[61px]" :native-scrollbar="false">
       <NLayoutContent>
         <div v-if="!disabled" class="p-4">
           <NDataTable
             :columns="createColumns()"
             :data="data"
             :loading="loading"
-            :max-height="253"
-            :min-height="253"
+            :max-height="266"
+            :min-height="266"
             virtual-scroll
+            size="small"
           />
           <NDrawer v-model:show="active" width="100%">
             <NDrawerContent closable :native-scrollbar="false" :title="title">
@@ -56,18 +60,7 @@
         </div>
         <div v-else class="p-4">
           <NResult status="error" title="错误" description="页面未加载完毕或不受支持">
-            <template #footer>
-              请尝试重新打开插件，不受支持页面参考
-              <NButton
-                text
-                tag="a"
-                href="https://developer.chrome.com/docs/extensions/mv3/faq/#faq-dev-15"
-                target="_blank"
-                type="primary"
-              >
-                这个问题
-              </NButton>
-            </template>
+            <template #footer> 请尝试重新打开插件或刷新页面 </template>
           </NResult>
         </div>
       </NLayoutContent>
@@ -103,6 +96,7 @@
         return (
           <NInput
             v-model:value={row.key}
+            size="small"
             onBlur={async () => {
               const id = await getTabId();
               if (id) {
@@ -127,6 +121,7 @@
         return (
           <NInput
             v-model:value={row.value}
+            size="small"
             onBlur={async () => {
               const id = await getTabId();
               if (id) {
