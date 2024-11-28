@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "localStorage 管理器",
-  "version": "0.3.1.0",
+  "version": "0.3.2.0",
   "description": "用于添加、删除、修改localStorage和sessionStorage的简单插件",
   "icons": {
     "16": "src/assets/16.png",
