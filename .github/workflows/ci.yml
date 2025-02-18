@@ -32,10 +32,10 @@ jobs:
 
       - name: Build
         run: |
-          pnpm run build
+          pnpm run zip
 
       - name: Upload Dist
         uses: actions/upload-artifact@v4
         with:
           name: localstorage-manager.zip
-          path: localstorage-manager*.zip
+          path: .output/localstorage-manager*.zip

@@ -1,15 +1,17 @@
 {
   "name": "localstorage-manager",
-  "version": "0.3.2",
+  "version": "1.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "run-p type-check build-only",
-    "preview": "vite preview",
-    "build-only": "vite build",
-    "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-    "format": "prettier --write src/"
+    "dev": "wxt",
+    "dev:firefox": "wxt -b firefox",
+    "build": "wxt build",
+    "build:firefox": "wxt build -b firefox",
+    "zip": "wxt zip",
+    "zip:firefox": "wxt zip -b firefox",
+    "compile": "vue-tsc --noEmit",
+    "postinstall": "wxt prepare"
   },
   "dependencies": {
     "@vicons/antd": "^0.13.0",
@@ -19,34 +21,23 @@
     "vue": "^3.5.13"
   },
   "devDependencies": {
-    "@crxjs/vite-plugin": "2.0.0-beta.30",
-    "@eslint/js": "^9.18.0",
-    "@eslint/markdown": "^6.2.1",
-    "@rushstack/eslint-patch": "^1.10.5",
-    "@tsconfig/node22": "^22.0.0",
-    "@types/chrome": "^0.0.299",
-    "@types/node": "^22.10.7",
-    "@vitejs/plugin-vue": "^5.2.1",
+    "@eslint/js": "^9.20.0",
+    "@eslint/markdown": "^6.2.2",
+    "@tailwindcss/vite": "^4.0.6",
+    "@types/chrome": "^0.0.304",
     "@vitejs/plugin-vue-jsx": "^4.1.1",
     "@vue/eslint-config-prettier": "^10.2.0",
-    "@vue/eslint-config-typescript": "^14.3.0",
-    "@vue/tsconfig": "^0.7.0",
-    "autoprefixer": "^10.4.20",
-    "eslint": "^9.18.0",
-    "eslint-define-config": "^2.1.0",
+    "@vue/eslint-config-typescript": "^14.4.0",
+    "@wxt-dev/module-vue": "^1.0.2",
+    "eslint": "^9.20.1",
     "eslint-plugin-vue": "^9.32.0",
-    "npm-run-all2": "^7.0.2",
-    "postcss": "^8.5.1",
-    "prettier": "^3.4.2",
-    "rollup-plugin-visualizer": "^5.14.0",
-    "tailwindcss": "^3.4.17",
+    "prettier": "^3.5.1",
+    "tailwindcss": "^4.0.6",
     "typescript": "^5.7.3",
-    "unplugin-auto-import": "^19.0.0",
-    "unplugin-compression": "^0.0.6",
-    "unplugin-vue-components": "^28.0.0",
-    "vite": "^6.0.11",
+    "unplugin-vue-components": "^28.2.0",
     "vue-eslint-parser": "^9.4.3",
-    "vue-tsc": "^2.2.0"
+    "vue-tsc": "^2.2.2",
+    "wxt": "^0.19.27"
   },
-  "packageManager": "pnpm@10.0.0+sha512.b8fef5494bd3fe4cbd4edabd0745df2ee5be3e4b0b8b08fa643aa3e4c6702ccc0f00d68fa8a8c9858a735a0032485a44990ed2810526c875e416f001b17df12b"
+  "packageManager": "pnpm@10.4.0+sha512.6b849d0787d97f8f4e1f03a9b8ff8f038e79e153d6f11ae539ae7c435ff9e796df6a862c991502695c7f9e8fac8aeafc1ac5a8dab47e36148d183832d886dd52"
 }

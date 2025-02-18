@@ -1,15 +1,15 @@
-export type RowData = {
+declare type RowData = {
   key: string;
   value: string;
 };
 
-export type OutputFile = {
+declare type OutputFile = {
   fileId: string;
   local: RowData[];
   session: RowData[];
 };
 
-export interface Requset {
+declare interface Requset {
   method: string;
   type: string;
   value?: any;

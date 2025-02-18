@@ -84,7 +84,6 @@
   import { destr } from 'destr';
   import type { DataTableColumns } from 'naive-ui';
   import { DeleteOutlined, CodeOutlined } from '@vicons/antd';
-  import type { RowData, OutputFile } from 'types';
 
   const dialog = useDialog();
   const message = useMessage();

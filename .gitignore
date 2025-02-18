@@ -14,7 +14,11 @@ dist-ssr
 coverage
 *.local
 *.zip
+.output
 stats.html
+stats-*.json
+.wxt
+web-ext.config.ts
 
 /cypress/videos/
 /cypress/screenshots/

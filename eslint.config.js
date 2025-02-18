@@ -1,13 +1,22 @@
-import { defineFlatConfig } from 'eslint-define-config';
 import js from '@eslint/js';
 import pluginVue from 'eslint-plugin-vue';
-import vueTsEslintConfig from '@vue/eslint-config-typescript';
+import {
+  defineConfigWithVueTs,
+  vueTsConfigs,
+  configureVueProject,
+} from '@vue/eslint-config-typescript';
 import prettierConfig from '@vue/eslint-config-prettier';
 import parserVue from 'vue-eslint-parser';
-import AutoImport from './.eslintrc-auto-import.json' with { type: 'json' };
 import markdown from '@eslint/markdown';
+import autoImports from './.wxt/eslint-auto-imports.mjs';
 
-export default defineFlatConfig([
+configureVueProject({
+  tsSyntaxInTemplates: true,
+  scriptLangs: ['ts', 'tsx'],
+});
+
+export default defineConfigWithVueTs(
+  autoImports,
   {
     name: 'app/all-js&ts-files',
     files: ['**/*.{js,mjs,cjs,jsx,ts,mts,tsx,vue}'],
@@ -15,12 +24,7 @@ export default defineFlatConfig([
       ...js.configs.recommended.rules,
     },
   },
-  ...vueTsEslintConfig({
-    supportedScriptLangs: {
-      ts: true,
-      tsx: true,
-    },
-  }),
+  vueTsConfigs.recommended,
   {
     name: 'app/vue-files',
     files: ['**/*.vue'],
@@ -37,11 +41,6 @@ export default defineFlatConfig([
   {
     name: 'app/files-to-lint',
     files: ['**/*.{ts,mts,tsx,vue}'],
-    languageOptions: {
-      globals: {
-        ...AutoImport.globals,
-      },
-    },
     rules: {
       // 允许被禁止的类型 https://typescript-eslint.io/rules/ban-types/
       '@typescript-eslint/ban-types': 'off',
@@ -88,4 +87,4 @@ export default defineFlatConfig([
     name: 'app/files-to-ignore',
     ignores: ['**/dist/**', '**/dist-ssr/**', '**/coverage/**'],
   },
-]);
+);
