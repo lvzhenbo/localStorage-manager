@@ -39,3 +39,4 @@ jobs:
         with:
           name: localstorage-manager.zip
           path: .output/localstorage-manager*.zip
+          include-hidden-files: true
