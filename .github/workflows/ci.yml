@@ -38,4 +38,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: localstorage-manager.zip
-          path: .output/*.zip
+          path: .output/localstorage-manager*.zip
