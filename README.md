@@ -8,7 +8,7 @@
 
 ## 技术栈
 
-[Vue](https://vuejs.org/) + [Naive UI](https://www.naiveui.com/) + [CRXJS](https://crxjs.dev/vite-plugin/)
+[Vue](https://vuejs.org/) + [Naive UI](https://www.naiveui.com/) + [WXT](https://github.com/wxt-dev/wxt)
 
 ## 推荐 IDE 设置
 
@@ -30,40 +30,16 @@ pnpm install
 pnpm dev
 ```
 
-### 预览
-
-```sh
-pnpm preview
-```
-
 ### 生产（类型检查、编译和最小化）
 
 ```sh
 pnpm build
 ```
 
-### 生产（只编译）
+### 打包ZIP
 
 ```sh
-pnpm build-only
-```
-
-### 类型检查
-
-```sh
-pnpm type-check
-```
-
-### [ESLint](https://eslint.org/) 格式化
-
-```sh
-pnpm lint
-```
-
-### [Prettier](https://prettier.io/) 格式化
-
-```sh
-pnpm format
+pnpm zip
 ```
 
 ## 许可证
