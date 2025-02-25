@@ -51,7 +51,6 @@ export default defineConfig({
   analysis: {
     enabled: true,
   },
-  // @ts-ignore
   vite: () => ({
     plugins: [
       vueJsx(),
