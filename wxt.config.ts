@@ -7,8 +7,7 @@ import { resolve } from 'node:path';
 
 // See https://wxt.dev/api/config.html
 export default defineConfig({
-  extensionApi: 'chrome',
-  runner: {
+  webExt: {
     chromiumProfile: resolve('.wxt/chrome-data'),
     keepProfileChanges: true,
   },
