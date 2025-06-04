@@ -4,6 +4,13 @@ import Components from 'unplugin-vue-components/vite';
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
 import tailwindcss from '@tailwindcss/vite';
 import { resolve } from 'node:path';
+import { existsSync, mkdirSync } from 'node:fs';
+
+// 确保 chrome-data 目录存在
+const chromiumProfilePath = resolve('.wxt/chrome-data');
+if (!existsSync(chromiumProfilePath)) {
+  mkdirSync(chromiumProfilePath, { recursive: true });
+}
 
 // See https://wxt.dev/api/config.html
 export default defineConfig({

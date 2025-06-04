@@ -8,7 +8,6 @@ import {
 import prettierConfig from '@vue/eslint-config-prettier';
 import parserVue from 'vue-eslint-parser';
 import markdown from '@eslint/markdown';
-import autoImports from './.wxt/eslint-auto-imports.mjs';
 
 configureVueProject({
   tsSyntaxInTemplates: true,
@@ -16,7 +15,6 @@ configureVueProject({
 });
 
 export default defineConfigWithVueTs(
-  autoImports,
   {
     name: 'app/all-js&ts-files',
     files: ['**/*.{js,mjs,cjs,jsx,ts,mts,tsx,vue}'],
@@ -26,6 +24,7 @@ export default defineConfigWithVueTs(
   },
   vueTsConfigs.recommended,
   {
+    extends: [...pluginVue.configs['flat/recommended']],
     name: 'app/vue-files',
     files: ['**/*.vue'],
     languageOptions: {
@@ -33,9 +32,6 @@ export default defineConfigWithVueTs(
       parserOptions: {
         ecmaVersion: 'latest',
       },
-    },
-    rules: {
-      ...pluginVue.configs['flat/recommended'].rules,
     },
   },
   {

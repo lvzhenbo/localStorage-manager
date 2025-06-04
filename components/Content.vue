@@ -54,7 +54,7 @@
           />
           <NDrawer v-model:show="active" width="100%">
             <NDrawerContent closable :native-scrollbar="false" :title="title">
-              <NCode :code="code" language="javascript" word-wrap />
+              <NCode :code="code" language="json" word-wrap show-line-numbers />
             </NDrawerContent>
           </NDrawer>
         </div>
@@ -187,7 +187,7 @@
               }}
               onClick={() => {
                 title.value = data.value[index].key;
-                code.value = JSON.stringify(destr(data.value[index].value), null, '\t');
+                code.value = JSON.stringify(destr(data.value[index].value), null, 2);
                 active.value = true;
               }}
             ></NButton>
