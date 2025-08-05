@@ -22,6 +22,7 @@ export default defineConfig({
   manifest: {
     name: 'localStorage 管理器',
     description: '用于添加、删除、修改localStorage和sessionStorage的简单插件',
+    permissions: ['tabs'],
   },
   imports: {
     // addons: {
