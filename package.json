@@ -21,22 +21,22 @@
     "vue": "^3.5.18"
   },
   "devDependencies": {
-    "@eslint/js": "^9.31.0",
+    "@eslint/js": "^9.32.0",
     "@tailwindcss/vite": "^4.1.11",
     "@types/chrome": "^0.1.1",
     "@vitejs/plugin-vue-jsx": "^5.0.1",
     "@vue/eslint-config-prettier": "^10.2.0",
     "@vue/eslint-config-typescript": "^14.6.0",
     "@wxt-dev/module-vue": "^1.0.2",
-    "eslint": "^9.31.0",
-    "eslint-plugin-vue": "^10.3.0",
+    "eslint": "^9.32.0",
+    "eslint-plugin-vue": "^10.4.0",
     "prettier": "^3.6.2",
     "tailwindcss": "^4.1.11",
-    "typescript": "^5.8.3",
+    "typescript": "^5.9.2",
     "unplugin-vue-components": "^28.8.0",
     "vue-eslint-parser": "^10.2.0",
-    "vue-tsc": "^3.0.4",
+    "vue-tsc": "^3.0.5",
     "wxt": "^0.20.7"
   },
-  "packageManager": "pnpm@10.13.1+sha512.37ebf1a5c7a30d5fabe0c5df44ee8da4c965ca0c5af3dbab28c3a1681b70a256218d05c81c9c0dcf767ef6b8551eb5b960042b9ed4300c59242336377e01cfad"
+  "packageManager": "pnpm@10.14.0+sha512.ad27a79641b49c3e481a16a805baa71817a04bbe06a38d17e60e2eaee83f6a146c6a688125f5792e48dd5ba30e7da52a5cda4c3992b9ccf333f9ce223af84748"
 }
