@@ -25,13 +25,6 @@ export default defineConfig({
     permissions: ['tabs'],
   },
   imports: {
-    // addons: {
-    //   vueTemplate: true,
-    // },
-    // eslintrc: {
-    //   enabled: true,
-    // },
-    // presets: ['vue'],
     imports: [
       {
         name: 'useDialog',

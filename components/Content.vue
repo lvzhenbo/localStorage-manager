@@ -8,7 +8,7 @@
             secondary
             circle
             type="primary"
-            :disabled="disabled"
+            :disabled
             size="small"
             @click="handleTypeChange"
           >
@@ -16,13 +16,11 @@
           </NButton>
         </div>
         <NSpace>
-          <NButton type="primary" :disabled="disabled" size="small" @click="handleAdd">
-            添加
-          </NButton>
-          <NButton :disabled="disabled" size="small" @click="getStorage"> 刷新 </NButton>
+          <NButton type="primary" :disabled size="small" @click="handleAdd"> 添加 </NButton>
+          <NButton :disabled size="small" @click="getStorage"> 刷新 </NButton>
           <NPopconfirm @positive-click="handleClear">
             <template #trigger>
-              <NButton :disabled="disabled" size="small" type="error"> 删除全部 </NButton>
+              <NButton :disabled size="small" type="error"> 删除全部 </NButton>
             </template>
             确定删除全部？
           </NPopconfirm>
@@ -31,16 +29,16 @@
             :show-file-list="false"
             accept="application/json"
             :max="1"
-            :disabled="disabled"
+            :disabled
             @update:file-list="handleImport"
           >
             <NButton size="small"> 导入 </NButton>
           </NUpload>
-          <NButton :disabled="disabled" size="small" @click="handleExport"> 导出 </NButton>
+          <NButton :disabled size="small" @click="handleExport"> 导出 </NButton>
         </NSpace>
       </div>
     </NLayoutHeader>
-    <NLayout position="absolute" class="!top-[53px]" :native-scrollbar="false">
+    <NLayout position="absolute" class="top-[53px]!" :native-scrollbar="false">
       <NLayoutContent>
         <div v-if="!disabled" class="p-3">
           <NDataTable
@@ -69,18 +67,7 @@
 </template>
 
 <script setup lang="tsx">
-  import {
-    NInput,
-    NButton,
-    NIcon,
-    NSpace,
-    NPopconfirm,
-    NForm,
-    NFormItem,
-    type FormInst,
-    type UploadFileInfo,
-    type UploadInst,
-  } from 'naive-ui';
+  import type { FormInst, UploadFileInfo, UploadInst } from 'naive-ui';
   import { destr } from 'destr';
   import type { DataTableColumns } from 'naive-ui';
   import { DeleteOutlined, CodeOutlined } from '@vicons/antd';
@@ -186,9 +173,12 @@
                 ),
               }}
               onClick={() => {
-                title.value = data.value[index].key;
-                code.value = JSON.stringify(destr(data.value[index].value), null, 2);
-                active.value = true;
+                const item = data.value[index];
+                if (item) {
+                  title.value = item.key;
+                  code.value = JSON.stringify(destr(item.value), null, 2);
+                  active.value = true;
+                }
               }}
             ></NButton>
           </NSpace>
@@ -230,7 +220,7 @@
 
   async function getTabId() {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    if (tab.id) {
+    if (tab?.id) {
       return tab.id;
     }
     return null;
@@ -357,8 +347,9 @@
       }
       uploadRef.value?.clear();
     };
-    if (fileList[0].file) {
-      reader.readAsText(fileList[0].file);
+    const firstFile = fileList[0];
+    if (firstFile?.file) {
+      reader.readAsText(firstFile.file);
     }
   }
 
@@ -369,8 +360,8 @@
   async function handleExport() {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
-    if (tab.id) {
-      const url = new URL(tab.url as string);
+    if (tab?.id && tab.url) {
+      const url = new URL(tab.url);
       const response = await sendMessage(tab.id, { method: 'export', type: 'export' });
       const blob = new Blob([JSON.stringify(response)], { type: 'application/json' });
       const blobUrl = URL.createObjectURL(blob);

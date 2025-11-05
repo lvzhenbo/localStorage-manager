@@ -13,17 +13,24 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Content: typeof import('./components/Content.vue')['default']
+    NButton: typeof import('naive-ui')['NButton']
     NCode: typeof import('naive-ui')['NCode']
     NConfigProvider: typeof import('naive-ui')['NConfigProvider']
     NDataTable: typeof import('naive-ui')['NDataTable']
     NDialogProvider: typeof import('naive-ui')['NDialogProvider']
     NDrawer: typeof import('naive-ui')['NDrawer']
     NDrawerContent: typeof import('naive-ui')['NDrawerContent']
+    NForm: typeof import('naive-ui')['NForm']
+    NFormItem: typeof import('naive-ui')['NFormItem']
+    NIcon: typeof import('naive-ui')['NIcon']
+    NInput: typeof import('naive-ui')['NInput']
     NLayout: typeof import('naive-ui')['NLayout']
     NLayoutContent: typeof import('naive-ui')['NLayoutContent']
     NLayoutHeader: typeof import('naive-ui')['NLayoutHeader']
     NMessageProvider: typeof import('naive-ui')['NMessageProvider']
+    NPopconfirm: typeof import('naive-ui')['NPopconfirm']
     NResult: typeof import('naive-ui')['NResult']
+    NSpace: typeof import('naive-ui')['NSpace']
     NUpload: typeof import('naive-ui')['NUpload']
   }
 }
@@ -31,16 +38,23 @@ declare module 'vue' {
 // For TSX support
 declare global {
   const Content: typeof import('./components/Content.vue')['default']
+  const NButton: typeof import('naive-ui')['NButton']
   const NCode: typeof import('naive-ui')['NCode']
   const NConfigProvider: typeof import('naive-ui')['NConfigProvider']
   const NDataTable: typeof import('naive-ui')['NDataTable']
   const NDialogProvider: typeof import('naive-ui')['NDialogProvider']
   const NDrawer: typeof import('naive-ui')['NDrawer']
   const NDrawerContent: typeof import('naive-ui')['NDrawerContent']
+  const NForm: typeof import('naive-ui')['NForm']
+  const NFormItem: typeof import('naive-ui')['NFormItem']
+  const NIcon: typeof import('naive-ui')['NIcon']
+  const NInput: typeof import('naive-ui')['NInput']
   const NLayout: typeof import('naive-ui')['NLayout']
   const NLayoutContent: typeof import('naive-ui')['NLayoutContent']
   const NLayoutHeader: typeof import('naive-ui')['NLayoutHeader']
   const NMessageProvider: typeof import('naive-ui')['NMessageProvider']
+  const NPopconfirm: typeof import('naive-ui')['NPopconfirm']
   const NResult: typeof import('naive-ui')['NResult']
+  const NSpace: typeof import('naive-ui')['NSpace']
   const NUpload: typeof import('naive-ui')['NUpload']
 }

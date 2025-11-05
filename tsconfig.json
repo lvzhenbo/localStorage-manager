@@ -2,6 +2,8 @@
   "extends": "./.wxt/tsconfig.json",
   "compilerOptions": {
     "jsx": "preserve",
-    "jsxImportSource": "vue"
+    "jsxImportSource": "vue",
+    "noUncheckedIndexedAccess": true,
+    "verbatimModuleSyntax": true
   }
 }

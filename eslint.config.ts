@@ -1,4 +1,4 @@
-import js from '@eslint/js';
+import { globalIgnores } from 'eslint/config';
 import pluginVue from 'eslint-plugin-vue';
 import {
   defineConfigWithVueTs,
@@ -9,18 +9,10 @@ import prettierConfig from '@vue/eslint-config-prettier';
 import parserVue from 'vue-eslint-parser';
 
 configureVueProject({
-  tsSyntaxInTemplates: true,
   scriptLangs: ['ts', 'tsx'],
 });
 
 export default defineConfigWithVueTs(
-  {
-    name: 'app/all-js&ts-files',
-    files: ['**/*.{js,mjs,cjs,jsx,ts,mts,tsx,vue}'],
-    rules: {
-      ...js.configs.recommended.rules,
-    },
-  },
   vueTsConfigs.recommended,
   {
     extends: [...pluginVue.configs['flat/recommended']],
@@ -47,24 +39,8 @@ export default defineConfigWithVueTs(
       '@typescript-eslint/no-empty-function': 'off',
       // 关闭强制多词组件名 https://eslint.vuejs.org/rules/multi-word-component-names.html
       'vue/multi-word-component-names': 'off',
-      // 强制执行自我关闭风格 https://eslint.vuejs.org/rules/html-self-closing.html
-      'vue/html-self-closing': [
-        'error',
-        {
-          html: {
-            void: 'always',
-            normal: 'never',
-            component: 'always',
-          },
-          svg: 'always',
-          math: 'always',
-        },
-      ],
     },
   },
   prettierConfig,
-  {
-    name: 'app/files-to-ignore',
-    ignores: ['**/dist/**', '**/dist-ssr/**', '**/coverage/**'],
-  },
+  globalIgnores(['**/dist/**', '**/dist-ssr/**', '**/coverage/**', '.output/**', '.wxt/**']),
 );
