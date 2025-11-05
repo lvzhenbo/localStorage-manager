@@ -1,1 +1,0 @@
-{"root":["./components.d.ts","./eslint.config.ts","./wxt.config.ts","./components/content.vue","./entrypoints/content.ts","./entrypoints/popup/app.vue","./entrypoints/popup/main.ts","./types/index.d.ts","./.wxt/wxt.d.ts"],"version":"5.9.3"}
